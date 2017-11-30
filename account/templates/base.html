@@ -1,0 +1,39 @@
+  <!DOCTYPE html>
+  <html>
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}Login{% endblock %}</title>
+  </head>
+  <body>
+    <header>
+      <div id="id_navigation">
+          <table>
+              <tr>
+                  <td><h2><a href="http://localhost:8080">Home</a></h2></td>
+                  <td><h2><a href="">Blog</a></h2></td>
+                  <td><h2><a href="">Glossary</a></h2></td>
+                  <td><h2>
+                      {% if user.is_authenticated %}
+                        Hi {{ user.username }}!
+                        <a href="{% url 'account:logout' %}?next=/">logout</a>
+                      {% else %}
+        <a href="{% url 'account:login' %}">login</a>
+      {% endif %}
+
+                  </h2></td>
+              </tr>
+          </table>
+      </div>
+      <h1>Acetrack's work space!!!</h1>
+    </header>
+    <hr>
+    <main>
+      {% block content %}
+      {% endblock %}
+    </main>
+    <hr>
+    <footer>
+      <a href="http://simpleisbetterthancomplex.com">simpleisbetterthancomplex.com</a>
+    </footer>
+  </body>
+  </html>

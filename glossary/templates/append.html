@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+<div class="my-box">
+<h2>Append a new Article</h2>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="/glossary/appendArticle" method="post">
+        {% csrf_token %}
+<textarea cols="70" rows="15" name="article" /></textarea>
+<input type="submit" value="append" />
+</form>
+</div>
+
+{% endblock %}
+
+
