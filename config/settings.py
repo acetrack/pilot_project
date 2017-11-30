@@ -25,7 +25,7 @@ SECRET_KEY = 'bvk139#)gw6^y(-gn8rk_+mis0jmxi&yzk!=yaul^4^c&b)o4$'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'acetrack.pythonanywhere.com']
 
 
 # Application definition

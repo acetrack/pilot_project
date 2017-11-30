@@ -53,7 +53,7 @@ class NewVisitorTest(unittest.TestCase):
 
         self.fail("테스트 종료")
 
-    def test_show_login(self):
+    def _test_show_login(self):
         self.browser.get(self.base_url + reverse('account:login'))
         self.assertEqual(reverse('account:login'), '/account/login/')
         # 화면에 'login'이라고 되어있다

@@ -1,5 +1,6 @@
 import string
 from django.shortcuts import render, redirect
+from nltk.tokenize import RegexpTokenizer
 from .models import Glossary
 
 
@@ -16,12 +17,16 @@ def append_article(request):
     else:
         # Todo 형태소 분석기 사용
         # https://www.lucypark.kr/courses/2015-dm/text-mining.html
-        not_letters = u'!"#%\'()*+,-./:;<=>?@&[\]^_`{|}~1234567890'
+        tokenizer = RegexpTokenizer('\w+|\$[\d\.]+|\S+')
+        not_letters = u'$!"#%\'()*+,-./:;<=>?@&[\]^_`{|}~1234567890 '
         table = dict((ord(char), ' ') for char in not_letters)
         article = request.POST['article'].lower().translate(table)
+        result = tokenizer.tokenize(article)
+
         occurrences = {}
-        for w in article.split(' '):
-            occurrences[w] = occurrences.get(w, 0) + 1
+
+        for i in result:
+            occurrences[i] = occurrences.get(i, 0) + 1
 
         # reset_isNew()
         for w in occurrences.keys():
