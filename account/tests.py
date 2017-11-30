@@ -59,13 +59,13 @@ class NewVisitorTest(unittest.TestCase):
         # 화면에 'login'이라고 되어있다
         self.assertEqual('Login', self.browser.title)
 
-        # id_username에 'acetrack'을 입력한다
+        # id_username에 'test_username'을 입력한다
         inputbox = self.browser.find_element_by_id('id_username')
-        inputbox.send_keys('acetrack')
+        inputbox.send_keys('test_username')
 
-        # id_password에 'sy2735928'을 입력한다
+        # id_password에 'test_password'을 입력한다
         inputbox = self.browser.find_element_by_id('id_password')
-        inputbox.send_keys('sy2735928')
+        inputbox.send_keys('test_password')
 
         # submit 버튼을 누른다
         self.browser.find_element_by_tag_name("button").click()
