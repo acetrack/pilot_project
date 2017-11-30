@@ -3,6 +3,7 @@ from .forms import UserForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login
 
+
 def sign_up(request):
     if request.method == "POST":
         form = UserForm(request.POST)
@@ -10,6 +11,5 @@ def sign_up(request):
             new_user = User.objects.create_user(**form.cleaned_data)
             login(request, new_user)
             return redirect('home')
-    else:
-        aform = UserForm()
-        return render(request, 'sign_up.html', {'used_template_form': aform})
+    aform = UserForm()
+    return render(request, 'sign_up.html', {'used_template_form': aform})
