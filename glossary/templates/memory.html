@@ -1,10 +1,124 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %}단어장{% endblock %}
+
+{% block content %}
+
+<script type='text/javascript'>
+var count = 0;
+{% if glossary_list %}
+var dic = []
+{% for g in glossary_list %}
+	dic.push('{{ g.word }}');
+{% endfor %}
+
+
+{% else %}
+var dic = null;
+{% endif %}
+
+function nextWord(event) {
+	var note=this.not;
+	var console=document.getElementById('memory-board');
+	console.innerHTML = dic[count];
+	var dic_button=document.getElementById('dic-button');
+	dic_button.innerHTML = "<a href='http://endic.daum.net/search.do?q=" + dic[count] + "' target='dic_frame'>go Dictionary</a>";
+	count += 1;
+	if (count > {{ glossary_list.count }})
+		count = 0;
+}
+
+//setInterval ('nextWord()', 2000);
+
+function goDictionary(event) {
+	
+}
+
+var auto_switch = 0;
+var autoRefresh = null;
+
+function runAutoRefresh(event) {
+	
+	var console=document.getElementById('auto-refresh-button');
+	if (auto_switch == 0) {
+		auto_switch = 1;
+		console.innerHTML = 'Stop';
+		autoRefresh = setInterval ('nextWord()', 2000);
+	} else {
+		auto_switch = 0;
+		console.innerHTML = 'Start';
+		if (autoRefresh)
+			clearInterval(autoRefresh);
+	}
+	
+}
+
+</script>
+
+<div id='title-board'>
+<h2>My Glossary</h2>
+
+<table width='95%'>
+<tr><td>
+<a href="{% url 'glossary:append' %}">Append new article?</a>
+</td></tr>
+<tr><td>
+<a href="{% url 'glossary:list' %}">Remember these!!!</a>
+</td></tr>
+<tr><td>
+<a href="{% url 'glossary:hidden_list' %}">Hidden list</a>
+</td></tr>
+<!-- td align='right'>
+<a href="/glossary/clear">Clear DB</a>
+</td>
+</tr-->
+</table>
+<br/>
+<br/>
+</div>
+
+<div id='memory-board' onclick='nextWord()'>
+{% if glossary_list %}
+	{{ glossary_list.count }}
+{% endif %}
+</div>
+
+<div id='auto-refresh-button' onclick='runAutoRefresh()'>
+Start
+</div>
+
+<div id='dic-button' onclick='goDictionary()'>
+{% if glossary_list %}
+	{{ glossary_list.count }}
+{% endif %}
+</div>
+
+
+<!-- div>
+
+{% if glossary_list %}
+	Total words: {{ glossary_list.count }}
+	<br />
+	<br />
+	<table>
+	{% for g in glossary_list %}
+		<tr>
+		<td width='40'> <font color='darkgray'> {{ g.frequency }} </font></td>
+		<td class='content-word'>
+		<a href="http://endic.daum.net/search.do?q={{ g.word }}" target='dic_frame'>{{ g.word }}</a> {{ g.desc }} 
+		</td>
+		<td> <font size='1'>
+			{% if hidden_flag %}
+				[<a href="/glossary/show?w={{ g.word }}&new={{ new_flag }}"> show </a>]
+			{% else %}
+				[<a href="/glossary/hide?w={{ g.word }}&new={{ new_flag }}"> hide </a>]
+			{% endif %}
+		</font></td>
+	{% endfor %}
+	</table>
+{% else %}
+	<p>No words</p>
+{% endif %}
+</div -->
+
+{% endblock %}

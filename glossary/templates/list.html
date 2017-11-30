@@ -1,10 +1,66 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %}단어장{% endblock %}
+
+{% block content %}
+
+<table width='95%'>
+<tr>
+	<td>
+		<a href="{% url 'glossary:append' %}">Append new article?</a>
+	</td>
+</tr>
+<tr>
+	<td>
+		<a href="{% url 'glossary:list' %}">Remember these!!!</a>
+	</td>
+</tr>
+<tr>
+	<td>
+		<a href="{% url 'glossary:hidden_list' %}">Hidden list</a>
+	</td>
+</tr>
+<tr>
+	<td>
+		<a href="{% url 'glossary:memory' %}">Do memory!!!</a>
+	</td>
+</tr>
+<!-- td align='right'>
+<a href="/glossary/clear">Clear DB</a>
+</td>
+</tr-->
+</table>
+<br/>
+<br/>
+{{ userid }}
+<br/>
+
+{% if glossary_list %}
+	Total words: {{ glossary_list.count }}
+	<br />
+	<br />
+	<table>
+	{% for g in glossary_list %}
+		<tr>
+		<td width='40'> <font color='darkgray'> {{ g.frequency }} </font></td>
+		<td class='content-word'>
+		<a href="http://endic.daum.net/search.do?q={{ g.word }}" target='dic_frame'>{{ g.word }}</a> {{ g.desc }}
+		</td>
+		<td> <font size='1'>
+			{% if hidden_flag %}
+				[<a href="/glossary/show?w={{ g.word }}&new={{ new_flag }}"> show </a>]
+			{% else %}
+				[<a href="/glossary/hide?w={{ g.word }}&new={{ new_flag }}"> hide </a>]
+			{% endif %}
+		</font></td>
+	{% endfor %}
+	</table>
+{% else %}
+	<p>No words</p>
+{% endif %}
+
+{% endblock %}
+
+
+
+

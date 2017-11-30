@@ -3,10 +3,15 @@ from . import views
 
 
 urlpatterns = [
+    url(r'^$', views.list, name='home'),
     url(r'^append$', views.append, name='append'),
-    url(r'^appendArticle$', views.appendArticle, name='appendArticle'),
-    # url(r'^glossary/hide', 'hide'),
-    # url(r'^glossary/show', 'show'),
+    url(r'^append_article$', views.append_article, name='append_article'),
+    url(r'^list$', views.list, name='list'),
+    url(r'^new_list$', views.new_list, name='new_list'),
+    url(r'^hide', views.hide, name='hide'),
+    url(r'^show', views.show, name='show'),
+    url(r'^hidden_list$', views.hidden_list, name='hidden_list'),
+    url(r'^memory$', views.memory, name='memory'),
     # url(r'^glossary/list$', 'list'),
     # url(r'^glossary/clear$', 'clear'),
     # url(r'^glossary/hidden_list$', 'hidden_list'),

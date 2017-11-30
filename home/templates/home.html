@@ -3,10 +3,12 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-        <div id="id_welcome_message" style="text-align: center;">
-            <h1><abbr title="호호아빠">아빠</abbr>가 만든 페이지야~~~</h1>
-        </div>
+    <div id="id_welcome_message" style="text-align: center;">
+        <h1><abbr title="호호아빠">아빠</abbr>가 만든 페이지야~~~</h1>
+    </div>
+    {% if not user.is_authenticated %}
         <div id="id_sign_up_btn">
             <a href="{% url 'account:sign_up' %}">회원가입</a>
         </div>
+    {% endif %}
 {% endblock %}
