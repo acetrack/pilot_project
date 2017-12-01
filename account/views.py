@@ -10,6 +10,6 @@ def sign_up(request):
         if form.is_valid():
             new_user = User.objects.create_user(**form.cleaned_data)
             login(request, new_user)
-            return redirect('home')
+            return redirect('list')
     aform = UserForm()
     return render(request, 'sign_up.html', {'used_template_form': aform})
