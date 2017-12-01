@@ -1,7 +1,35 @@
 import string
 from django.shortcuts import render, redirect
 from nltk.tokenize import RegexpTokenizer
+from newspaper import Article
 from .models import Glossary
+
+
+def tokenize(request, article):
+    tokenizer = RegexpTokenizer('\w+|\$[\d\.]+|\S+')
+    not_letters = u'$!"#%\'()*+,-./:;<=>?@&[\]^_`{|}~1234567890 '
+    table = dict((ord(char), ' ') for char in not_letters)
+    a = article.lower().translate(table)
+    result = tokenizer.tokenize(a)
+
+    occurrences = {}
+
+    for i in result:
+        occurrences[i] = occurrences.get(i, 0) + 1
+
+    # reset_isNew()
+    for w in occurrences.keys():
+        try:
+            t = Glossary.objects.filter(account=request.user).get(word=w)
+        except (KeyError, Glossary.DoesNotExist):
+            new_glossary = Glossary(word=w, account=request.user)
+            new_glossary.frequency = occurrences.get(w, 0)
+            new_glossary.isShow = True
+            new_glossary.isNew = True
+            new_glossary.save()
+        else:
+            t.frequency += occurrences.get(w, 0)
+            t.save()
 
 
 def append(request):
@@ -11,36 +39,25 @@ def append(request):
         return render(request, 'append.html')
 
 
+def append_url(request):
+    if not request.user.is_authenticated:
+        return redirect("/")
+    else:
+        url = request.POST['target_url']
+        article = Article(url)
+        article.download()
+        article.parse()
+        tokenize(request, article.text)
+        return redirect('glossary:new_list')
+
+
 def append_article(request):
     if not request.user.is_authenticated:
         return redirect("/")
     else:
         # Todo 형태소 분석기 사용
         # https://www.lucypark.kr/courses/2015-dm/text-mining.html
-        tokenizer = RegexpTokenizer('\w+|\$[\d\.]+|\S+')
-        not_letters = u'$!"#%\'()*+,-./:;<=>?@&[\]^_`{|}~1234567890 '
-        table = dict((ord(char), ' ') for char in not_letters)
-        article = request.POST['article'].lower().translate(table)
-        result = tokenizer.tokenize(article)
-
-        occurrences = {}
-
-        for i in result:
-            occurrences[i] = occurrences.get(i, 0) + 1
-
-        # reset_isNew()
-        for w in occurrences.keys():
-            try:
-                t = Glossary.objects.filter(account=request.user).get(word=w)
-            except (KeyError, Glossary.DoesNotExist):
-                new_glossary = Glossary(word=w, account=request.user)
-                new_glossary.frequency = occurrences.get(w, 0)
-                new_glossary.isShow = True
-                new_glossary.isNew = True
-                new_glossary.save()
-            else:
-                t.frequency += occurrences.get(w, 0)
-                t.save()
+        tokenize(request, request.POST['article'])
         return redirect('glossary:new_list')
 
 

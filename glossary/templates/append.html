@@ -13,6 +13,12 @@
 <input type="submit" value="append" />
 </form>
 
+<form action="{% url 'glossary:append_url' %}" method="POST">
+        {% csrf_token %}
+<textarea cols="70" rows="5" name="target_url" /></textarea>
+<input type="submit" value="append" />
+</form>
+
 </div>
 
 {% endblock %}

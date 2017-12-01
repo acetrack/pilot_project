@@ -6,6 +6,7 @@ urlpatterns = [
     url(r'^$', views.list, name='home'),
     url(r'^append$', views.append, name='append'),
     url(r'^append_article$', views.append_article, name='append_article'),
+    url(r'^append_url$', views.append_url, name='append_url'),
     url(r'^list$', views.list, name='list'),
     url(r'^new_list$', views.new_list, name='new_list'),
     url(r'^hide', views.hide, name='hide'),
