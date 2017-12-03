@@ -2,12 +2,20 @@ import string
 from django.shortcuts import render, redirect
 from nltk.tokenize import RegexpTokenizer
 from newspaper import Article
+from PIL import Image
+from pytesseract import pytesseract
+from django.core.files.storage import FileSystemStorage
+
+
+from django.conf import settings
+# from django.conf.urls.static import static
+
 from .models import Glossary
 
 
 def tokenize(request, article):
     tokenizer = RegexpTokenizer('\w+|\$[\d\.]+|\S+')
-    not_letters = u'$!"#%\'()*+,-./:;<=>?@&[\]^_`{|}~1234567890 '
+    not_letters = u'$!"#%\'()*+,-./:;<=>?@&[\]^_`{|}~1234567890 \t’‘\n\r'
     table = dict((ord(char), ' ') for char in not_letters)
     a = article.lower().translate(table)
     result = tokenizer.tokenize(a)
@@ -49,6 +57,24 @@ def append_url(request):
         article.parse()
         tokenize(request, article.text)
         return redirect('glossary:new_list')
+
+
+def append_image(request):
+    if not request.user.is_authenticated:
+        return redirect("/")
+    else:
+        if request.method == 'POST' and request.FILES['image_file']:
+            tempfile = request.FILES['image_file']
+            fs = FileSystemStorage()
+            filename = fs.save(tempfile.name, tempfile)
+            aa = settings.MEDIA_ROOT + "/" + filename
+            im = Image.open(aa)
+            article = pytesseract.image_to_string(im)
+            fs.delete(aa)
+            tokenize(request, article)
+            return redirect('glossary:new_list')
+        else:
+            return redirect('glossary:append')
 
 
 def append_article(request):

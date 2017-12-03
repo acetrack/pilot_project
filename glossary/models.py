@@ -15,3 +15,7 @@ class Glossary(models.Model):
 
     def is_show_flag(self):
         return self.isShow
+
+
+class UploadFileModel(models.Model):
+    file = models.FileField(null=True)
