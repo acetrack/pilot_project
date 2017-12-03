@@ -9,15 +9,16 @@
 
 <form action="{% url 'glossary:append_article' %}" method="POST">
         {% csrf_token %}
-<textarea cols="70" rows="15" name="article" placeholder="Text Article"/></textarea>
+<textarea cols="70" rows="15" name="article" placeholder="Text Article" maxlength="10000"/></textarea>
 <input type="submit" value="Append" />
 </form>
-
+<p/>
 <form action="{% url 'glossary:append_url' %}" method="POST">
         {% csrf_token %}
 <textarea cols="70" rows="5" name="target_url" placeholder="http://news.google.com"/></textarea>
 <input type="submit" value="Append" />
 </form>
+<p/>
 
 <form action="{% url 'glossary:append_image' %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}

@@ -15,7 +15,7 @@ from .models import Glossary
 
 def tokenize(request, article):
     tokenizer = RegexpTokenizer('\w+|\$[\d\.]+|\S+')
-    not_letters = u'$!"#%\'()*+,-./:;<=>?@&[\]^_`{|}~1234567890 \t’‘\n\r'
+    not_letters = u'$!"#%\'()*+,-./:;<=>?@&[\]^_`{|}~1234567890 \t’‘\n\r¶'
     table = dict((ord(char), ' ') for char in not_letters)
     a = article.lower().translate(table)
     result = tokenizer.tokenize(a)
