@@ -41,23 +41,35 @@
 	<br />
 	<table>
 	{% for g in glossary_list %}
-		<tr>
+		<tr id="{{ g.word }}">
 		<td width='40'> <font color='darkgray'> {{ g.frequency }} </font></td>
 		<td class='content-word'>
 		<a href="http://endic.daum.net/search.do?q={{ g.word }}" target='dic_frame'>{{ g.word }}</a> {{ g.desc }}
 		</td>
 		<td> <font size='1'>
 			{% if hidden_flag %}
-				[<a href="/glossary/show?w={{ g.word }}&new={{ new_flag }}"> show </a>]
+				[<a class="word" id="{{ g.word }}" href="/glossary/show?w={{ g.word }}&new={{ new_flag }}"> show </a>]
 			{% else %}
-				[<a href="/glossary/hide?w={{ g.word }}&new={{ new_flag }}"> hide </a>]
+				[<a class="word" id="{{ g.word }}" href="/glossary/hide?w={{ g.word }}&new={{ new_flag }}"> hide </a>]
 			{% endif %}
 		</font></td>
+        </tr>
 	{% endfor %}
 	</table>
 {% else %}
 	<p>No words</p>
 {% endif %}
+
+<script>
+    // 화면에서 해당 단어가 사라지게 한다.
+    // Ajax를 사용해서 화면이 reload되지 않게 해야 한다.
+    $( document ).ready(function() {
+        $( "a.word" ).click(function( event ) {
+            event.preventDefault();
+            $("tr#"+event.target.id).hide("slow");
+        });
+    });
+</script>
 
 {% endblock %}
 
