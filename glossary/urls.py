@@ -14,7 +14,7 @@ urlpatterns = [
     url(r'^show', views.show, name='show'),
     url(r'^hidden_list$', views.hidden_list, name='hidden_list'),
     url(r'^memory$', views.memory, name='memory'),
-    # url(r'^glossary/list$', 'list'),
+    url(r'^remove_all', views.remove_all, name='remove_all'),
     # url(r'^glossary/clear$', 'clear'),
     # url(r'^glossary/hidden_list$', 'hidden_list'),
     # url(r'^glossary/new_list$', 'new_list'),

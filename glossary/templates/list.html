@@ -25,10 +25,12 @@
 		<a href="{% url 'glossary:memory' %}">Do memory!!!</a>
 	</td>
 </tr>
-<!-- td align='right'>
-<a href="/glossary/clear">Clear DB</a>
-</td>
-</tr-->
+<tr>
+	<td>
+		<a style="font-weight: bold; color: red;"
+           href="{% url 'glossary:remove_all' %}">[[[ Remove all!!! ]]]</a>
+	</td>
+</tr>
 </table>
 <br/>
 <br/>
@@ -47,13 +49,17 @@
 		<!--<a href="http://endic.daum.net/search.do?q={{ g.word }}" target='dic_frame'>{{ g.word }}</a> {{ g.desc }}-->
 		<a href="http://endic.naver.com/search.nhn?sLn=kr&isOnlyViewEE=N&query={{ g.word }}" target='dic_frame'>{{ g.word }}</a> {{ g.desc }}
 		</td>
-		<td> <font size='1'>
+		<td style="font-size: 90%; padding-left: 15px;">
 			{% if hidden_flag %}
-				[<a class="word" id="{{ g.word }}" href="/glossary/show?w={{ g.word }}&new={{ new_flag }}"> show </a>]
+				[<a class="word"
+                    id="{{ g.word }}"
+                    href="/glossary/show?w={{ g.word }}&new={{ new_flag }}"> show </a>]
 			{% else %}
-				[<a class="word" id="{{ g.word }}" href="/glossary/hide?w={{ g.word }}&new={{ new_flag }}"> hide </a>]
+				[<a class="word"
+                    id="{{ g.word }}"
+                    href="/glossary/hide?w={{ g.word }}&new={{ new_flag }}"> hide </a>]
 			{% endif %}
-		</font></td>
+		</td>
         </tr>
 	{% endfor %}
 	</table>

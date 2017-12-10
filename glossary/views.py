@@ -174,3 +174,12 @@ def memory(request):
                       {'glossary_list': glossary_list,
                        'hidden_flag': hidden_flag,
                        'new_flag': new_flag})
+
+
+def remove_all(request):
+    if not request.user.is_authenticated():
+        return redirect("/")
+    else:
+        t = Glossary.objects.filter(account=request.user)
+        t.delete()
+        return redirect('glossary:list')
