@@ -66,6 +66,11 @@
     $( document ).ready(function() {
         $( "a.word" ).click(function( event ) {
             event.preventDefault();
+            $.get( event.target.getAttribute("href"),
+                function( resp ) {
+                console.log( resp ); // server response
+            });
+            // alert( event.target.getAttribute("href") );
             $("tr#"+event.target.id).hide("slow");
         });
     });
