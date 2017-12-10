@@ -44,7 +44,8 @@
 		<tr id="{{ g.word }}">
 		<td width='40'> <font color='darkgray'> {{ g.frequency }} </font></td>
 		<td class='content-word'>
-		<a href="http://endic.daum.net/search.do?q={{ g.word }}" target='dic_frame'>{{ g.word }}</a> {{ g.desc }}
+		<!--<a href="http://endic.daum.net/search.do?q={{ g.word }}" target='dic_frame'>{{ g.word }}</a> {{ g.desc }}-->
+		<a href="http://endic.naver.com/search.nhn?sLn=kr&isOnlyViewEE=N&query={{ g.word }}" target='dic_frame'>{{ g.word }}</a> {{ g.desc }}
 		</td>
 		<td> <font size='1'>
 			{% if hidden_flag %}
