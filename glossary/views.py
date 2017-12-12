@@ -1,4 +1,3 @@
-import string
 from django.shortcuts import render, redirect
 from nltk.tokenize import RegexpTokenizer
 from newspaper import Article
@@ -15,7 +14,7 @@ from .models import Glossary
 
 def tokenize(request, article):
     tokenizer = RegexpTokenizer('\w+|\$[\d\.]+|\S+')
-    not_letters = u'$!"#%\'()*+,-./:;<=>?@&[\]^_`{|}~1234567890 \t’‘\n\r¶'
+    not_letters = u'$!"#%\'()*+,-./:;<=>?@&[\]^_`{|}~1234567890 \t’‘\n\r¶★'
     table = dict((ord(char), ' ') for char in not_letters)
     a = article.lower().translate(table)
     result = tokenizer.tokenize(a)
@@ -51,7 +50,7 @@ def append_url(request):
     if not request.user.is_authenticated:
         return redirect("/")
     else:
-        url = request.POST['target_url']
+        url = request.GET['target_url']
         article = Article(url)
         article.download()
         article.parse()
@@ -81,7 +80,7 @@ def append_article(request):
     if not request.user.is_authenticated:
         return redirect("/")
     else:
-        # Todo 형태소 분석기 사용
+        # 형태소 분석기 사용
         # https://www.lucypark.kr/courses/2015-dm/text-mining.html
         tokenize(request, request.POST['article'])
         return redirect('glossary:new_list')
