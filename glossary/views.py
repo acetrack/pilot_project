@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from django.shortcuts import render, redirect
 from nltk.tokenize import RegexpTokenizer
 from newspaper import Article
