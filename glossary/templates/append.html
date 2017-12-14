@@ -13,16 +13,28 @@
 <input type="submit" value="Append" />
 </form>
 <p/>
+<h2>Append a new article by URL</h2>
 <form action="{% url 'glossary:append_url' %}" method="GET">
         {% csrf_token %}
-<textarea cols="70" rows="5" name="target_url" placeholder="http://news.google.com"/></textarea>
+<input size="80" name="target_url" placeholder="http://news.google.com"/></input><br/>
 <input type="submit" value="Append" />
 </form>
 <p/>
 
+<h2>Append a new article by image file</h2>
 <form action="{% url 'glossary:append_image' %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
 <input type="file" name="image_file" />
+<input type="submit" value="Upload" />
+</form>
+<p/>
+
+<h2>Append a new article by Document file (pdf, txt...)</h2>
+<form action="{% url 'glossary:append_document' %}"
+      method="POST"
+      enctype="multipart/form-data">
+        {% csrf_token %}
+<input type="file" name="document_file" />
 <input type="submit" value="Upload" />
 </form>
 

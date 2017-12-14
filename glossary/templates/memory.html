@@ -43,7 +43,7 @@ function runAutoRefresh(event) {
 	if (auto_switch == 0) {
 		auto_switch = 1;
 		console.innerHTML = 'Stop';
-		autoRefresh = setInterval ('nextWord()', 2000);
+		autoRefresh = setInterval ('nextWord()', 5000);
 	} else {
 		auto_switch = 0;
 		console.innerHTML = 'Start';
@@ -63,10 +63,10 @@ function runAutoRefresh(event) {
 <a href="{% url 'glossary:append' %}">Append new article?</a>
 </td></tr>
 <tr><td>
-<a href="{% url 'glossary:list' %}">Remember these!!!</a>
+<a href="{% url 'glossary:to_remember_list' %}">To remember these!!!</a>
 </td></tr>
 <tr><td>
-<a href="{% url 'glossary:hidden_list' %}">Hidden list</a>
+<a href="{% url 'glossary:remembered_list' %}">Remembered words list</a>
 </td></tr>
 <!-- td align='right'>
 <a href="/glossary/clear">Clear DB</a>
@@ -77,7 +77,7 @@ function runAutoRefresh(event) {
 <br/>
 </div>
 
-<div id='memory-board' onclick='nextWord()'>
+<div style="height: 50px; padding: 15px 15px; font-size: 40px; line-height: 20px;" id='memory-board' onclick='nextWord()'>
 {% if glossary_list %}
 	{{ glossary_list.count }}
 {% endif %}

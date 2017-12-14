@@ -6,11 +6,11 @@
 
 <ul>
     <li><a href="{% url 'glossary:append' %}">Append new article?</a></li>
-    <li><a href="{% url 'glossary:list' %}">Remember these!!!</a></li>
-    <li><a href="{% url 'glossary:hidden_list' %}">Hidden list</a></li>
+    <li><a href="{% url 'glossary:to_remember_list' %}">To remember these!!!</a></li>
+    <li><a href="{% url 'glossary:remembered_list' %}">Remembered words list</a></li>
     <li><a href="{% url 'glossary:memory' %}">Do memory!!!</a></li>
     <li><a style="font-weight: bold; color: red;"
-           href="{% url 'glossary:remove_all' %}">[[[ Remove all!!! ]]]</a></li>
+           href="{% url 'glossary:delete_all' %}">[[[ Delete all!!! ]]]</a></li>
 </ul>
 
 <div class="container">
@@ -30,7 +30,9 @@
 </div>
 <div style="padding-left: 20px; padding-top: 20px;">
 {% if glossary_list %}
-	Total words: {{ glossary_list.count }}
+	Total words: {{ total_count }}<br/>
+	To remember words: {{ to_remember_count }}<br/>
+	Remembered words: {{ remembered_count }}
 	<br />
 	<br />
 	<table>
@@ -46,7 +48,10 @@
 			{% if hidden_flag %}
 				[<a class="word"
                     id="{{ g.word }}"
-                    href="/glossary/show?w={{ g.word }}&new={{ new_flag }}"> show </a>]
+                    href="/glossary/show?w={{ g.word }}&new={{ new_flag }}"> show </a> |
+                <a class="word"
+                   id="{{ g.word }}"
+                   href="/glossary/delete_word?w={{ g.word }}&new={{ new_flag }}"> delete </a>]
 			{% else %}
 				[<a class="word"
                     id="{{ g.word }}"

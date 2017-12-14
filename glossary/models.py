@@ -9,6 +9,7 @@ class Glossary(models.Model):
     desc = models.CharField(max_length=500)
     isNew = models.BooleanField()
     account = models.ForeignKey(User)
+    glossary_title = models.CharField(max_length=200, default='undefined')
 
     def __unicode__(self):
         return self.word
@@ -17,5 +18,5 @@ class Glossary(models.Model):
         return self.isShow
 
 
-class UploadFileModel(models.Model):
-    file = models.FileField(null=True)
+# class UploadFileModel(models.Model):
+#     file = models.FileField(null=True)
