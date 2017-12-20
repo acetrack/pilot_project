@@ -122,7 +122,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-LOGIN_REDIRECT_URL = '/glossary/list'
+LOGIN_REDIRECT_URL = '/glossary/to_remember_list'
 LOGOUT_REDIRECT_URL = '/'
 
 MEDIA_URL = '/media/'
