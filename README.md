@@ -10,4 +10,6 @@ venv)python manage.py makemigrations
 
 venv)python manage.py migrate
 
+venv)python manage.py createsuperuser
+
 server 실행
