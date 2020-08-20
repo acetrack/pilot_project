@@ -4,8 +4,7 @@ beautifulsoup4==4.6.0
 certifi==2017.11.5
 chardet==3.0.4
 cssselect==1.0.1
-# Django==3.1
-Django==1.11.29
+Django==3.1
 feedfinder2==0.0.4
 feedparser==5.2.1
 idna==2.7
@@ -29,3 +28,4 @@ selenium==3.7.0
 six==1.11.0
 tldextract==2.2.0
 urllib3==1.24.2
+django-allauth==0.42.0

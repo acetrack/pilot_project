@@ -6,7 +6,6 @@ from pytesseract import pytesseract
 from django.core.files.storage import FileSystemStorage
 import PyPDF2
 
-
 from django.conf import settings
 # from django.conf.urls.static import static
 
@@ -41,7 +40,7 @@ def tokenize_and_save(request, article):
 
 
 def append(request):
-    if not request.user.is_authenticated():
+    if not request.user.is_authenticated:
         return redirect("/")
     else:
         return render(request, 'append.html')
@@ -128,7 +127,7 @@ def get_total_count(glossary_obj, user):
 
 
 def to_remember_list(request):
-    if not request.user.is_authenticated():
+    if not request.user.is_authenticated:
         return redirect("/")
     else:
         glossary_obj = Glossary.objects
@@ -148,28 +147,28 @@ def to_remember_list(request):
              'new_flag': new_flag,
              'total_count': total_count,
              'remembered_count': remembered_count,
-             'to_remember_count': to_remember_count},)
+             'to_remember_count': to_remember_count}, )
 
 
 def new_list(request):
-    if not request.user.is_authenticated():
+    if not request.user.is_authenticated:
         return redirect("/")
     else:
         glossary_list = Glossary.objects.filter(
-          isShow=True,
-          isNew=True,
-          account=request.user).order_by('-frequency', 'word')[:5000]
+            isShow=True,
+            isNew=True,
+            account=request.user).order_by('-frequency', 'word')[:5000]
         hidden_flag = False
         new_flag = 'T'
         return render(request,
                       'list.html',
-                        {'glossary_list': glossary_list,
-                         'hidden_flag': hidden_flag,
-                         'new_flag': new_flag})
+                      {'glossary_list': glossary_list,
+                       'hidden_flag': hidden_flag,
+                       'new_flag': new_flag})
 
 
 def hide(request):
-    if not request.user.is_authenticated():
+    if not request.user.is_authenticated:
         return redirect("/")
     else:
         t = Glossary.objects.filter(
@@ -183,18 +182,18 @@ def hide(request):
 
 
 def show(request):
-    if not request.user.is_authenticated():
+    if not request.user.is_authenticated:
         return redirect("/")
     else:
         t = Glossary.objects.filter(
-            account=request.user).get(word = request.GET['w'])
+            account=request.user).get(word=request.GET['w'])
         t.isShow = True
         t.save()
         return redirect('glossary:remembered_list')
 
 
 def remembered_list(request):
-    if not request.user.is_authenticated():
+    if not request.user.is_authenticated:
         return redirect("/")
     else:
         glossary_obj = Glossary.objects
@@ -216,7 +215,7 @@ def remembered_list(request):
 
 
 def memory(request):
-    if not request.user.is_authenticated():
+    if not request.user.is_authenticated:
         return redirect("/")
     else:
         glossary_list = Glossary.objects.filter(
@@ -231,7 +230,7 @@ def memory(request):
 
 
 def delete_all(request):
-    if not request.user.is_authenticated():
+    if not request.user.is_authenticated:
         return redirect("/")
     else:
         t = Glossary.objects.filter(account=request.user)
@@ -240,7 +239,7 @@ def delete_all(request):
 
 
 def delete_word(request):
-    if not request.user.is_authenticated():
+    if not request.user.is_authenticated:
         return redirect("/")
     else:
         t = Glossary.objects.filter(

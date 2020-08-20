@@ -8,7 +8,7 @@ class Glossary(models.Model):
     isShow = models.BooleanField()
     desc = models.CharField(max_length=500)
     isNew = models.BooleanField()
-    account = models.ForeignKey(User)
+    account = models.ForeignKey(User, on_delete=models.CASCADE)
     glossary_title = models.CharField(max_length=200, default='undefined')
 
     def __unicode__(self):
