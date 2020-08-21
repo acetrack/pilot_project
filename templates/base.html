@@ -44,11 +44,10 @@
                         <!-- li><a href="/">Blog</a></li -->
                         <li><a href="{% url 'glossary:home' %}">Glossary</a></li>
                         <!--<li><a href="javascript:void(open('http://localhost:8080/glossary/append_url?target_url='+encodeURIComponent(location.href)));">BreakIt!</a></li>-->
-                        <li><a href="javascript:void(open('http://acetrack.pythonanywhere.com/glossary/append_url?target_url='+encodeURIComponent(location.href)));">BreakIt!</a></li>
                         {% if user.is_authenticated %}
-                            <li><a href="{% url 'account:logout' %}?next=/">logout</a></li>
+                            <li><a href="{% url 'account_logout' %}?next=/">Sign Out</a></li>
                         {% else %}
-                            <li><a href="{% url 'account:login' %}">login</a></li>
+                            <li><a href="{% url 'account_login' %}">Sign In</a></li>
                         {% endif %}
                         </ul>
                     </div><!--/.nav-collapse -->
