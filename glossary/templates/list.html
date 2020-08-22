@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}단어장{% endblock %}
+{% block title %}{{ user.username }} Glossary{% endblock %}
 
 {% block content %}
 
@@ -12,6 +12,9 @@
     <li><a style="font-weight: bold; color: red;"
            href="{% url 'glossary:delete_all' %}">[[[ Delete all!!! ]]]</a></li>
 </ul>
+<!--TODO: reload 했을 때, 선택되어있던 사전이 표시되도록 해야 한다.
+	TODO: 사용자가 미리 선택하는 사전값을 저장해 둘 수 있도록 한다.
+ -->
 
 <div class="container">
     <div class="form-gourp">
@@ -28,13 +31,14 @@
         </div>
     </div>
 </div>
-<div style="padding-left: 20px; padding-top: 20px;">
+<div style="padding-left: 10%; padding-top: 20px;">
 {% if glossary_list %}
-	Total words: {{ total_count }}<br/>
-	To remember words: {{ to_remember_count }}<br/>
-	Remembered words: {{ remembered_count }}
-	<br />
-	<br />
+	Total words: {{ total_count }} [
+	{# https://www.it-swarm.dev/ko/python/django-템플릿에-대한-나누기-필터가-있습니까/941116741/ #}
+		Not yet: {% widthratio to_remember_count total_count 100 %}% |
+		My words: {% widthratio remembered_count total_count 100 %}% ]
+	<br/><br/>
+
 	<table>
 	{% for g in glossary_list %}
 		<tr id="{{ g.word }}">
@@ -45,6 +49,7 @@
            target='dic_frame'>{{ g.word }}</a> {{ g.desc }}
 		</td>
 		<td style="font-size: 90%; padding-left: 15px;">
+			<!-- 기억해야 할 단어들인지, 기억한 단어들인지 구분에 따라서 action들이 달라짐 -->
 			{% if hidden_flag %}
 				[<a class="word"
                     id="{{ g.word }}"
