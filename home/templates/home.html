@@ -12,4 +12,13 @@
     <img src="{% static 'home/bg.jpg' %}" width="90%" align="center"/>
     <h1><abbr title="호호아빠">아빠</abbr>가 만든 페이지야~~~</h1>
 </div>
+<div class="btn white">
+    <a href="{% provider_login_url 'google' %}" style="text-transform:none">
+        <div class="left">
+            <img width="20px" alt="Google &quot;G&quot; Logo"
+                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png"/>
+            Google Account
+        </div>
+    </a>
+</div>
 {% endblock %}
