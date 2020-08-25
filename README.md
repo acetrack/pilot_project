@@ -1,7 +1,15 @@
 # pilot_project
 version: python 3.6.3
 
+vitualenv 설정
+<pre>
+console)python3.6 -m venv venv
+</pre>
+
 requirements.txt를 통해서 pakages 설치
+<pre>
+venv)pip install -r requirements.txt
+</pre>
 
 sqlite DB 첫 설정을 위해서
 <pre>
