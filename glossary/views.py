@@ -46,6 +46,10 @@ def append(request):
         return render(request, 'append.html')
 
 
+def test_root():
+    return redirect('/')
+
+
 def append_url(request):
     if not request.user.is_authenticated:
         return redirect("/")
