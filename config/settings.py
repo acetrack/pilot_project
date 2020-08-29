@@ -49,6 +49,19 @@ INSTALLED_APPS = [
     'glossary',
 ]
 
+
+# 카카오를 위해서는 반드시 입력이 되어야 함.
+# client id는 노출이 되어도 크게 문제가 안되지 않나?
+SOCIALACCOUNT_PROVIDERS = {
+    'kakao': {
+        'APP': {
+            'client_id': '94145a13e2e373b96412bd4b97edc0cc',
+            'secret': '',
+            'key': ''
+        }
+    }
+}
+
 # for using `allauth`
 AUTHENTICATION_BACKENDS = (
     # Needed to login by username in Django admin, regardless of `allauth`
