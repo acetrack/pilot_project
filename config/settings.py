@@ -50,18 +50,6 @@ INSTALLED_APPS = [
 ]
 
 
-# 카카오를 위해서는 반드시 입력이 되어야 함.
-# client id는 노출이 되어도 크게 문제가 안되지 않나?
-SOCIALACCOUNT_PROVIDERS = {
-    'kakao': {
-        'APP': {
-            'client_id': '94145a13e2e373b96412bd4b97edc0cc',
-            'secret': '',
-            'key': ''
-        }
-    }
-}
-
 # for using `allauth`
 AUTHENTICATION_BACKENDS = (
     # Needed to login by username in Django admin, regardless of `allauth`
@@ -73,6 +61,8 @@ AUTHENTICATION_BACKENDS = (
 
 # site_id is primary key for queryset item in the site application.
 # if add a site instead of replacing for the given examples.com, then you should use 2.
+# 이 녀석 때문
+# 일단, admin site에서 example.com을 항상 넣어주자.
 SITE_ID = 1
 
 MIDDLEWARE = [
