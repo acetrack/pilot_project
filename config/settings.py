@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'glossary',
 ]
 
+
 # for using `allauth`
 AUTHENTICATION_BACKENDS = (
     # Needed to login by username in Django admin, regardless of `allauth`
@@ -60,6 +61,8 @@ AUTHENTICATION_BACKENDS = (
 
 # site_id is primary key for queryset item in the site application.
 # if add a site instead of replacing for the given examples.com, then you should use 2.
+# 이 녀석 때문
+# 일단, admin site에서 example.com을 항상 넣어주자.
 SITE_ID = 1
 
 MIDDLEWARE = [
