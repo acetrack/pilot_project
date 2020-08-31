@@ -153,13 +153,13 @@ LOGOUT_REDIRECT_URL = '/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-SITE_DOMAIN = os.environ.get("SITE_DOMAIN")
-SOCIALACCOUNT_PROVIDERS = {
-    'kakao': {
-        'APP': {
-            'client_id': os.environ.get("KAKAO_REST_API_KEY"),
-            'secret': os.environ.get("KAKAP_CALLBACK_URL"),
-            'key': ''
-        }
-    }
-}
+# SITE_DOMAIN = os.environ.get("SITE_DOMAIN")
+# SOCIALACCOUNT_PROVIDERS = {
+#     'kakao': {
+#         'APP': {
+#             'client_id': os.environ.get("KAKAO_REST_API_KEY"),
+#             'secret': os.environ.get("KAKAP_CALLBACK_URL"),
+#             'key': ''
+#         }
+#     }
+# }
