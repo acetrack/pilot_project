@@ -11,6 +11,7 @@ urlpatterns = [
     path('glossary/', include('glossary.urls')),
     path('accounts/', include("allauth.urls")),
     # path('account/', include('account.urls')),
+    path('api/', include('api.urls')),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

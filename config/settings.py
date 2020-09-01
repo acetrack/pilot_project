@@ -35,6 +35,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
 
+    # Required app for djangorestframework
+    'rest_framework',
+
     # Required apps for allauth:
     'allauth',
     'allauth.account',
@@ -47,6 +50,7 @@ INSTALLED_APPS = [
 
     'home',
     'glossary',
+    'api',
 ]
 
 

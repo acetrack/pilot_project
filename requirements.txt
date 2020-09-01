@@ -45,3 +45,4 @@ toml==0.10.1
 urllib3==1.25.10
 zipp==3.1.0
 singledispatch==3.4.0.3
+djangorestframework~=3.11.1
