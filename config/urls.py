@@ -1,12 +1,12 @@
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from home.views import home_page, custom_sign_in
+from home.views import home_page
 from django.urls import include, path
 
 urlpatterns = [
     path('', home_page, name='home'),
-    path('custom_sign_in', custom_sign_in, name='custom_sign_in'),
+    # path('custom_sign_in', custom_sign_in, name='custom_sign_in'),
     path('admin/', admin.site.urls),
     path('glossary/', include('glossary.urls')),
     path('accounts/', include("allauth.urls")),
