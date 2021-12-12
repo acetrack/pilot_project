@@ -18,7 +18,7 @@ joblib==0.16.0
 lxml==4.5.2
 more-itertools==8.4.0
 newspaper3k==0.2.8
-nltk==3.4.5
+nltk==3.6.5
 oauthlib==3.1.0
 olefile==0.46
 packaging==20.4
